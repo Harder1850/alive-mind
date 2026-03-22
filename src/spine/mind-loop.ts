@@ -1,41 +1,30 @@
-import { StateModel } from "./state-model";
-import { ConsciousBuffer } from "./conscious-buffer";
+import type { Signal } from '../../../alive-constitution/contracts/signal';
+import type { Decision } from '../../../alive-constitution/contracts/decision';
 
-/**
- * MindLoop — Core cognitive cycle.
- * Runs: perceive → process → decide → (output Decision contract only)
- *
- * DOES NOT execute actions. Outputs Decision contracts to Runtime.
- */
-export class MindLoop {
-  private running = false;
-  private stateModel = new StateModel();
-  private buffer = new ConsciousBuffer();
+export function think(signal: Signal): Decision {
+  const text = signal.raw_content.toLowerCase().trim();
 
-  start(): void {
-    if (this.running) return;
-    this.running = true;
-    this.loop();
+  if (text.includes('hello')) {
+    return {
+      id: crypto.randomUUID(),
+      selected_action: {
+        type: 'display_text',
+        payload: 'Hello from ALIVE.',
+      },
+      confidence: 0.9,
+      admissibility_status: 'pending',
+      reason: 'Matched greeting pattern.',
+    };
   }
 
-  stop(): void {
-    this.running = false;
-  }
-
-  private async loop(): Promise<void> {
-    while (this.running) {
-      await this.cycle();
-      await this.sleep(100);
-    }
-  }
-
-  private async cycle(): Promise<void> {
-    const state = this.stateModel.get();
-    this.stateModel.update({ cycleCount: state.cycleCount + 1 });
-    // TODO: UC → STM → Decisions pipeline
-  }
-
-  private sleep(ms: number): Promise<void> {
-    return new Promise((r) => setTimeout(r, ms));
-  }
+  return {
+    id: crypto.randomUUID(),
+    selected_action: {
+      type: 'display_text',
+      payload: `Received: ${signal.raw_content}`,
+    },
+    confidence: 0.6,
+    admissibility_status: 'pending',
+    reason: 'Default echo response for initial vertical slice.',
+  };
 }

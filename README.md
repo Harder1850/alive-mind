@@ -1,6 +1,28 @@
 # ALIVE Mind
 
-> **Constitution defines → Runtime governs → Mind thinks → Body acts → Interface displays**
+## Commitment
+
+This repository performs cognition for ALIVE.
+
+It is responsible for:
+- interpreting signals
+- reasoning and simulation
+- forming decisions
+- managing working and long-term memory (future phases)
+
+All outputs are descriptive and advisory.
+
+It does not:
+- execute actions
+- access external systems directly
+- enforce policy
+- bypass runtime governance
+
+Cognition exists only when allowed by runtime.
+
+## Architecture Spine
+
+Constitution defines → Runtime governs → Mind thinks → Body acts → Interface displays
 
 ## Purpose
 Cognitive layer responsible for reasoning, memory, simulation, and decision formation.
