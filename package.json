@@ -1,0 +1,15 @@
+{
+  "name": "alive-mind",
+  "version": "0.1.0",
+  "description": "Cognitive layer of ALIVE. Handles unconscious processing, STM, LTM, reasoning, memory, simulation, and decision formation.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"No tests yet\"",
+    "start": "node dist/index.js"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
