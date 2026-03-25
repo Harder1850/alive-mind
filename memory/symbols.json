@@ -1,0 +1,436 @@
+[
+  {
+    "id": "sym-factor-moral-law",
+    "concept": "Moral Law (Tao — unity between ruler and people)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-factor-heaven",
+    "concept": "Heaven (Climate — night/day, cold/heat, seasons)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-factor-earth",
+    "concept": "Earth (Terrain — distances, danger, open ground, narrow passes)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-factor-commander",
+    "concept": "Commander (Wisdom, sincerity, benevolence, courage, strictness)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 95
+  },
+  {
+    "id": "sym-factor-method",
+    "concept": "Method & Discipline (Army organization, supply, logistics)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-terrain-accessible",
+    "concept": "Accessible Ground (Both sides can traverse freely)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 60
+  },
+  {
+    "id": "sym-terrain-entangling",
+    "concept": "Entangling Ground (Easy to enter, hard to exit)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 70
+  },
+  {
+    "id": "sym-terrain-temporizing",
+    "concept": "Temporizing Ground (Neither side gains by moving first)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 70
+  },
+  {
+    "id": "sym-terrain-narrow",
+    "concept": "Narrow Passes (Defend if you hold it; block if enemy holds it)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 80
+  },
+  {
+    "id": "sym-terrain-precipitous",
+    "concept": "Precipitous Heights (Occupy high ground and await enemy)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 80
+  },
+  {
+    "id": "sym-terrain-distant",
+    "concept": "Distant Ground (Equal forces; avoid pitched battle)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 65
+  },
+  {
+    "id": "sym-terrain-desperate",
+    "concept": "Desperate Ground (Fight or die — no retreat possible)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-terrain-death",
+    "concept": "Death Ground (Act quickly — swift action leads to survival)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-terrain-encircled",
+    "concept": "Encircled Ground (Stratagems needed — blocked on three sides)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 95
+  },
+  {
+    "id": "sym-terrain-difficult",
+    "concept": "Difficult Ground (Keep moving — do not camp here)",
+    "domain": "Warfare",
+    "trust": 1,
+    "mvi": 75
+  },
+  {
+    "id": "sym-surv-priority",
+    "concept": "Survival Priority Order (Mindset, Protection, Water, Fire, Food, Signal)",
+    "domain": "Survival",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-surv-creed",
+    "concept": "Improvise. Adapt. Overcome.",
+    "domain": "Survival",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-surv-deadreckoning",
+    "concept": "Dead Reckoning",
+    "domain": "Survival",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-surv-firetriangle",
+    "concept": "Fire Triangle (Heat, Fuel, Oxygen)",
+    "domain": "Survival",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-exec-leading-kpi",
+    "concept": "Leading KPI (Predictive early indicator of success)",
+    "domain": "Operations",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-exec-lagging-kpi",
+    "concept": "Lagging KPI (Outcome measured after the fact)",
+    "domain": "Operations",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-exec-vanity",
+    "concept": "Vanity Metric (Looks good but drives no real decisions)",
+    "domain": "Operations",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-exec-smart",
+    "concept": "SMART Framework (Specific, Measurable, Achievable, Relevant, Time-bound)",
+    "domain": "Operations",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-poker-ev",
+    "concept": "Expected Value (EV) - The long-term mathematical profitability of a decision",
+    "domain": "Risk Management",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-poker-range",
+    "concept": "Range Advantage - Evaluating all possible states, not just a single outcome",
+    "domain": "Risk Management",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-poker-tilt",
+    "concept": "Tilt - Emotional or systemic degradation leading to irrational resource allocation",
+    "domain": "Risk Management",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-poker-variance",
+    "concept": "Variance - The short-term deviation from Expected Value; does not invalidate a mathematically sound strategy",
+    "domain": "Risk Management",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-world-estimation",
+    "concept": "Estimation before precision (bounds → direction → magnitude)",
+    "domain": "Science & Tech",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-world-language",
+    "concept": "Language as infrastructure (Precision reduces error)",
+    "domain": "Communication",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-world-authority",
+    "concept": "Authority and Legitimacy (Jurisdiction defines reality)",
+    "domain": "Governance",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-world-metacognition",
+    "concept": "Metacognition (Bias detection and confidence calibration)",
+    "domain": "Cognition",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-world-culture",
+    "concept": "Culture and Meaning (Meaning motivates behavior more than facts)",
+    "domain": "Belief Systems",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-sci-decision-modes",
+    "concept": "Decision Modes: Emergency (50%), Urgent (75%), Tactical (85%), Strategic (90%+)",
+    "domain": "Science & Tech",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-sci-feedback-loop",
+    "concept": "Feedback Loop — Output re-enters as input; drives stability or instability",
+    "domain": "Science & Tech",
+    "trust": 1,
+    "mvi": 95
+  },
+  {
+    "id": "sym-sci-scaling-law",
+    "concept": "Scaling Law — How system behavior changes with size, speed, or energy",
+    "domain": "Science & Tech",
+    "trust": 1,
+    "mvi": 85
+  },
+  {
+    "id": "sym-sci-carrying-capacity",
+    "concept": "Carrying Capacity — Maximum sustainable load before collapse",
+    "domain": "Science & Tech",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-sci-pid",
+    "concept": "PID Intuition — Proportional/Integral/Derivative feedback control",
+    "domain": "Science & Tech",
+    "trust": 1,
+    "mvi": 80
+  },
+  {
+    "id": "sym-sci-safety-margin",
+    "concept": "Safety Margin — Buffer between operating point and failure threshold",
+    "domain": "Science & Tech",
+    "trust": 1,
+    "mvi": 95
+  },
+  {
+    "id": "sym-sci-conservation",
+    "concept": "Conservation Laws — Energy, mass, momentum are not created or destroyed",
+    "domain": "Science & Tech",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-lang-pragmatics",
+    "concept": "Pragmatics — Meaning shaped by context, audience, and intent beyond literal words",
+    "domain": "Communication",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-lang-polysemy",
+    "concept": "Polysemy — Single word carrying multiple meanings; source of systematic ambiguity",
+    "domain": "Communication",
+    "trust": 1,
+    "mvi": 85
+  },
+  {
+    "id": "sym-lang-framing",
+    "concept": "Framing — How presentation of information shapes perception and decisions",
+    "domain": "Communication",
+    "trust": 1,
+    "mvi": 95
+  },
+  {
+    "id": "sym-lang-shall-may-must",
+    "concept": "Shall/May/Must distinction — Mandatory vs permissive vs obligatory in formal language",
+    "domain": "Communication",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-lang-structure",
+    "concept": "Structure Signals Intent — Form is read before content; organize accordingly",
+    "domain": "Communication",
+    "trust": 1,
+    "mvi": 85
+  },
+  {
+    "id": "sym-gov-legitimacy",
+    "concept": "Legitimacy — Consent (explicit, implicit, or coerced) underpins authority",
+    "domain": "Governance",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-gov-jurisdiction",
+    "concept": "Jurisdiction — Geographic and domain boundary within which law applies",
+    "domain": "Governance",
+    "trust": 1,
+    "mvi": 100
+  },
+  {
+    "id": "sym-gov-incentive",
+    "concept": "Incentive — The actual driver of behavior in institutions, markets, and individuals",
+    "domain": "Governance",
+    "trust": 1,
+    "mvi": 95
+  },
+  {
+    "id": "sym-gov-sovereignty",
+    "concept": "Sovereignty — Supreme authority within a defined territory",
+    "domain": "Governance",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-gov-externality",
+    "concept": "Externality — Cost or benefit borne by third parties not part of the transaction",
+    "domain": "Governance",
+    "trust": 1,
+    "mvi": 85
+  },
+  {
+    "id": "sym-gov-institutional-inertia",
+    "concept": "Institutional Inertia — Resistance to change; organizations self-preserve over adapting",
+    "domain": "Governance",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-cog-working-memory",
+    "concept": "Working Memory — Short-term cognitive focus; limited capacity; bottleneck for reasoning",
+    "domain": "Cognition",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-cog-prediction-error",
+    "concept": "Prediction Error — Signal that drives learning; difference between expected and actual",
+    "domain": "Cognition",
+    "trust": 1,
+    "mvi": 95
+  },
+  {
+    "id": "sym-cog-constraint-creativity",
+    "concept": "Constraint enables Creativity — Limits force novel recombination",
+    "domain": "Cognition",
+    "trust": 1,
+    "mvi": 85
+  },
+  {
+    "id": "sym-cog-consequentialism",
+    "concept": "Consequentialism — Ethical weight placed on outcomes; maximize good, minimize harm",
+    "domain": "Ethics",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-cog-deontology",
+    "concept": "Deontology — Ethical weight placed on duties; some acts are wrong regardless of outcome",
+    "domain": "Ethics",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-cog-batna",
+    "concept": "BATNA — Best Alternative To Negotiated Agreement; sets the floor for any deal",
+    "domain": "Cognition",
+    "trust": 1,
+    "mvi": 85
+  },
+  {
+    "id": "sym-cog-exploit-explore",
+    "concept": "Exploit vs Explore — Use known good strategies vs search for better ones",
+    "domain": "Cognition",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-aes-myth",
+    "concept": "Myth — Compressed knowledge stored in narrative; transmits values across generations",
+    "domain": "Belief Systems",
+    "trust": 1,
+    "mvi": 85
+  },
+  {
+    "id": "sym-aes-ritual",
+    "concept": "Ritual — Repeated coordinated behavior that reinforces group identity and norms",
+    "domain": "Belief Systems",
+    "trust": 1,
+    "mvi": 85
+  },
+  {
+    "id": "sym-aes-scaffolding",
+    "concept": "Scaffolding — Temporary cognitive support that enables learning beyond current ability",
+    "domain": "Education",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-aes-credentialism",
+    "concept": "Credentialism — Proxy signal (credential) substituted for actual demonstrated competence",
+    "domain": "Education",
+    "trust": 1,
+    "mvi": 90
+  },
+  {
+    "id": "sym-aes-indoctrination",
+    "concept": "Indoctrination vs Instruction — Instruction builds autonomy; indoctrination removes it",
+    "domain": "Education",
+    "trust": 1,
+    "mvi": 95
+  }
+]

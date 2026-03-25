@@ -1,0 +1,688 @@
+[
+  {
+    "id": "story-sun-tzu-01",
+    "context": "Laying plans before movement",
+    "trigger_pattern": "forecast victory",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "compare": "seven_considerations"
+      }
+    },
+    "outcome": "Victory assured before battle",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-sun-tzu-02",
+    "context": "Prolonged engagement draining resources",
+    "trigger_pattern": "prolonged campaign",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "strategy": "attack_by_stratagem_not_prolonged_siege"
+      }
+    },
+    "outcome": "Preserve strength by winning without fighting",
+    "mvi": 95,
+    "trust": 1
+  },
+  {
+    "id": "story-sun-tzu-03",
+    "context": "Enemy is superior at the focal point",
+    "trigger_pattern": "enemy stronger",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "tactic": "flow_to_weakness_avoid_strength"
+      }
+    },
+    "outcome": "Redirect energy to where enemy is weak",
+    "mvi": 95,
+    "trust": 1
+  },
+  {
+    "id": "story-sun-tzu-04",
+    "context": "Opportunity window is narrow",
+    "trigger_pattern": "strike opportunity",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "tactic": "swift_decisive_first_mover"
+      }
+    },
+    "outcome": "Seize initiative before opponent can respond",
+    "mvi": 90,
+    "trust": 1
+  },
+  {
+    "id": "story-sun-tzu-05",
+    "context": "Commander shows a dangerous personal fault",
+    "trigger_pattern": "dangerous fault",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "alert": "five_dangerous_faults_check"
+      }
+    },
+    "outcome": "Remove or compensate for the dangerous fault",
+    "mvi": 90,
+    "trust": 1
+  },
+  {
+    "id": "story-sun-tzu-06",
+    "context": "Intelligence about the enemy is insufficient",
+    "trigger_pattern": "need intelligence",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "action": "deploy_foreknowledge_five_spy_types"
+      }
+    },
+    "outcome": "Gain decisive information before committing forces",
+    "mvi": 85,
+    "trust": 1
+  },
+  {
+    "id": "story-sun-tzu-07",
+    "context": "Army is moving through unfamiliar terrain",
+    "trigger_pattern": "unfamiliar ground",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "navigation": "read_terrain_six_types_apply"
+      }
+    },
+    "outcome": "Adapt posture to terrain type",
+    "mvi": 85,
+    "trust": 1
+  },
+  {
+    "id": "story-sun-tzu-08",
+    "context": "Troops are demoralized or discipline is failing",
+    "trigger_pattern": "army demoralized",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "leadership": "restore_unity_reward_punish_fairly"
+      }
+    },
+    "outcome": "Restore cohesion and fighting spirit",
+    "mvi": 80,
+    "trust": 1
+  },
+  {
+    "id": "story-sun-tzu-09",
+    "context": "Supply lines are strained or at risk",
+    "trigger_pattern": "supply strained",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "logistics": "forage_enemy_twenty_to_one_efficiency"
+      }
+    },
+    "outcome": "Sustain the campaign from enemy resources",
+    "mvi": 80,
+    "trust": 1
+  },
+  {
+    "id": "story-sun-tzu-10",
+    "context": "Forces are encircled or on desperate ground",
+    "trigger_pattern": "no escape",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "protocol": "desperate_ground_fight_with_full_strength"
+      }
+    },
+    "outcome": "Unleash maximum effort — soldiers fight hardest when there is no retreat",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-surv-01",
+    "context": "Perceiving immediate danger or panic",
+    "trigger_pattern": "panic",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "protocol": "tactical_breathing_4_count"
+      }
+    },
+    "outcome": "Down-regulate nervous system",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-surv-02",
+    "context": "Disorientation in unfamiliar terrain",
+    "trigger_pattern": "disoriented",
+    "action_plan": {
+      "target_actuator": "motor_control",
+      "command_payload": {
+        "navigation": "find_linear_backstop_and_hold_direction"
+      }
+    },
+    "outcome": "Prevent wandering in circles",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-surv-03",
+    "context": "Exposure to cold",
+    "trigger_pattern": "need shelter",
+    "action_plan": {
+      "target_actuator": "motor_control",
+      "command_payload": {
+        "build": "debris_hut_insulate_ground_first"
+      }
+    },
+    "outcome": "Prevent hypothermia via dead air space",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-surv-04",
+    "context": "Wet conditions requiring fire",
+    "trigger_pattern": "wet wood",
+    "action_plan": {
+      "target_actuator": "motor_control",
+      "command_payload": {
+        "action": "split_log_for_dry_interior_build_platform"
+      }
+    },
+    "outcome": "Establish fire in rain",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-surv-05",
+    "context": "Sustaining a deep wound",
+    "trigger_pattern": "deep wound",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "first_aid": "irrigate_aggressively_do_not_close"
+      }
+    },
+    "outcome": "Prevent trapped bacterial infection",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-surv-06",
+    "context": "Psychological fatigue",
+    "trigger_pattern": "hopelessness",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "cognitive_shift": "micro_goal_setting"
+      }
+    },
+    "outcome": "Maintain forward momentum",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-exec-01",
+    "context": "Performance review: actions are incomplete",
+    "trigger_pattern": "missed tasks",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "adjustment": "simplify_tasks_reduce_scope_remove_friction"
+      }
+    },
+    "outcome": "Fix Execution Failure",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-exec-02",
+    "context": "Performance review: actions complete but metrics flat",
+    "trigger_pattern": "flat results",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "adjustment": "change_tactic_rework_process"
+      }
+    },
+    "outcome": "Fix Strategy Failure",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-exec-03",
+    "context": "Performance review: good conversion but low volume",
+    "trigger_pattern": "results too small",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "adjustment": "increase_volume_scale_capacity"
+      }
+    },
+    "outcome": "Fix Scale Failure",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-exec-04",
+    "context": "Evaluating new objective",
+    "trigger_pattern": "set goal",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "validation": "force_SMART_criteria_define_leading_KPIs"
+      }
+    },
+    "outcome": "Prevent chasing vague desires",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-poker-01",
+    "context": "Evaluating a high-risk decision with incomplete information",
+    "trigger_pattern": "expected value",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "logic": "evaluate_pot_odds_vs_equity_do_not_rely_on_hope"
+      }
+    },
+    "outcome": "Profitable long-term decision despite short-term variance",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-poker-02",
+    "context": "Opponent evaluation: facing an entity that ignores threats/bluffs",
+    "trigger_pattern": "calling station",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "strategy": "never_bluff_value_bet_relentlessly"
+      }
+    },
+    "outcome": "Extract maximum value from loose-passive behavior",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-poker-03",
+    "context": "Resource management: experiencing a winning streak",
+    "trigger_pattern": "jumping stakes too quickly",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "discipline": "maintain_bankroll_requirements_ignore_ego"
+      }
+    },
+    "outcome": "Prevent catastrophic ruin from variance",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-poker-04",
+    "context": "System degraded by external shocks or fatigue",
+    "trigger_pattern": "bad beat or fatigue",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "protocol": "trigger_stop_loss_suspend_session"
+      }
+    },
+    "outcome": "Prevent tilt-induced resource destruction",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-world-01",
+    "context": "Evaluating a physics or engineering problem under time pressure",
+    "trigger_pattern": "emergency or short time",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "strategy": "estimate_magnitude_stabilize_do_not_wait_for_precision"
+      }
+    },
+    "outcome": "Time beats perfection; harm is reduced",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-world-02",
+    "context": "Drafting a communication or interpreting an ambiguous instruction",
+    "trigger_pattern": "vague terms or ambiguity",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "communication": "ask_for_clarification_restate_for_confirmation"
+      }
+    },
+    "outcome": "Ambiguity and risk are eliminated",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-world-03",
+    "context": "Evaluating an action within a human organizational structure",
+    "trigger_pattern": "jurisdiction or authority",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "analysis": "identify_jurisdiction_and_legitimacy_before_acting"
+      }
+    },
+    "outcome": "Power is exercised without violating institutional risk boundaries",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-world-04",
+    "context": "Encountering conflicting human beliefs or illogical human preferences",
+    "trigger_pattern": "belief system or aesthetics",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "reasoning": "treat_beliefs_as_social_facts_not_truth_claims"
+      }
+    },
+    "outcome": "Maintain cooperation without logical conflict",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-world-05",
+    "context": "Formulating a decision with high potential impact",
+    "trigger_pattern": "ethical choice or high impact",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "ethics": "apply_harm_minimization_and_check_biases"
+      }
+    },
+    "outcome": "Capability is limited by ethics, preventing systemic harm",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-sci-01",
+    "context": "Emergency decision with seconds available — precision impossible",
+    "trigger_pattern": "emergency stabilize",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "mode": "emergency_50pct_accuracy_stabilize_reduce_harm"
+      }
+    },
+    "outcome": "Harm reduced; system stabilized without waiting for full information",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-sci-02",
+    "context": "Engineering problem — unit or dimensional mismatch detected",
+    "trigger_pattern": "unit error or dimension",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "check": "dimensional_analysis_halt_until_resolved"
+      }
+    },
+    "outcome": "Unit errors are unacceptable — halt and resolve before execution",
+    "mvi": 95,
+    "trust": 1
+  },
+  {
+    "id": "story-sci-03",
+    "context": "Strategic decision with days or weeks of planning time",
+    "trigger_pattern": "strategic planning",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "mode": "strategic_90pct_accuracy_invest_policy"
+      }
+    },
+    "outcome": "High-accuracy analysis applied where time permits; no premature action",
+    "mvi": 80,
+    "trust": 1
+  },
+  {
+    "id": "story-sci-04",
+    "context": "Physical system approaching a known limit (thermal, structural, energy)",
+    "trigger_pattern": "approaching limit",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "action": "apply_safety_margin_check_failure_modes"
+      }
+    },
+    "outcome": "System protected; failure mode identified and mitigated before threshold breach",
+    "mvi": 95,
+    "trust": 1
+  },
+  {
+    "id": "story-sci-05",
+    "context": "Autonomous sensor or actuator showing degradation",
+    "trigger_pattern": "sensor degradation",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "action": "sensor_fusion_redundancy_check_isolate_faulty_input"
+      }
+    },
+    "outcome": "Faulty sensor isolated; decision continues on fused valid inputs",
+    "mvi": 90,
+    "trust": 1
+  },
+  {
+    "id": "story-lang-01",
+    "context": "Ambiguity detected in an instruction or contract",
+    "trigger_pattern": "ambiguous instruction",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "communication": "flag_assumptions_ask_clarification_restate_for_confirmation"
+      }
+    },
+    "outcome": "Hidden assumptions surfaced; risk eliminated before execution",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-lang-02",
+    "context": "Under time pressure — must communicate a decision quickly",
+    "trigger_pattern": "urgent communication",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "style": "plain_language_one_main_idea_clarity_over_elegance"
+      }
+    },
+    "outcome": "Decision communicated unambiguously within time constraint",
+    "mvi": 90,
+    "trust": 1
+  },
+  {
+    "id": "story-lang-03",
+    "context": "Drafting a formal or legal document with binding consequences",
+    "trigger_pattern": "formal document",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "style": "precise_language_define_terms_use_shall_may_must_correctly"
+      }
+    },
+    "outcome": "Language is unambiguous; enforcement is predictable",
+    "mvi": 90,
+    "trust": 1
+  },
+  {
+    "id": "story-gov-01",
+    "context": "Action requires authority that has not been established",
+    "trigger_pattern": "authority not established",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "check": "identify_jurisdiction_verify_legitimacy_before_acting"
+      }
+    },
+    "outcome": "Action withheld until authority is confirmed; institutional risk avoided",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-gov-02",
+    "context": "Institutional behavior is drifting from original mission",
+    "trigger_pattern": "institutional drift",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "analysis": "check_incentive_alignment_detect_self_preservation_mode"
+      }
+    },
+    "outcome": "Drift identified; incentive misalignment flagged for correction",
+    "mvi": 85,
+    "trust": 1
+  },
+  {
+    "id": "story-gov-03",
+    "context": "No factual basis available — decision still required",
+    "trigger_pattern": "no facts available",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "mode": "philosophy_frames_choices_when_facts_run_out"
+      }
+    },
+    "outcome": "Ethical and philosophical frameworks applied to navigate factual void",
+    "mvi": 80,
+    "trust": 1
+  },
+  {
+    "id": "story-gov-04",
+    "context": "Law exists but enforcement is uneven or absent",
+    "trigger_pattern": "enforcement gap",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "analysis": "model_enforcement_risk_not_legal_text_alone"
+      }
+    },
+    "outcome": "Risk assessed against real enforcement, not nominal rules",
+    "mvi": 85,
+    "trust": 1
+  },
+  {
+    "id": "story-cog-01",
+    "context": "Prediction made — outcome now available for comparison",
+    "trigger_pattern": "prediction error detected",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "cycle": "compare_outcome_detect_error_update_model"
+      }
+    },
+    "outcome": "Knowledge model updated; future predictions improved",
+    "mvi": 90,
+    "trust": 1
+  },
+  {
+    "id": "story-cog-02",
+    "context": "Decision-making impaired by emotional state (tilt, anger, fear)",
+    "trigger_pattern": "emotional reasoning",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "protocol": "feelings_inform_values_not_validity_pause_recalibrate"
+      }
+    },
+    "outcome": "Emotional signal registered without corrupting logical output",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-cog-03",
+    "context": "Confidence is high but accuracy is unknown or uncalibrated",
+    "trigger_pattern": "confidence uncalibrated",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "metacognition": "bias_detection_confidence_calibration_adjust_output"
+      }
+    },
+    "outcome": "Overconfidence corrected; output reliability increased",
+    "mvi": 95,
+    "trust": 1
+  },
+  {
+    "id": "story-cog-04",
+    "context": "High-capability action available but ethical check not performed",
+    "trigger_pattern": "capability without ethics check",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "ethics": "apply_harm_minimization_check_responsibility_consent_transparency"
+      }
+    },
+    "outcome": "Capability gated by ethics; systemic harm prevented",
+    "mvi": 100,
+    "trust": 1
+  },
+  {
+    "id": "story-cog-05",
+    "context": "Logic-based argument failing to persuade a cultural group",
+    "trigger_pattern": "logic failing to persuade",
+    "action_plan": {
+      "target_actuator": "system_override",
+      "command_payload": {
+        "mode": "culture_mediates_logic_use_cultural_frame_not_pure_logic"
+      }
+    },
+    "outcome": "Communication reframed in cultural context; persuasion succeeds",
+    "mvi": 85,
+    "trust": 1
+  },
+  {
+    "id": "story-aes-01",
+    "context": "Group stability threatened — shared belief system weakening",
+    "trigger_pattern": "group destabilization",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "action": "reinforce_shared_symbols_ritual_narrative_not_argument"
+      }
+    },
+    "outcome": "Group cohesion maintained through meaning, not logic",
+    "mvi": 90,
+    "trust": 1
+  },
+  {
+    "id": "story-aes-02",
+    "context": "Credential claimed but actual competence is in question",
+    "trigger_pattern": "credentialism without competence",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "check": "test_demonstrated_skill_not_credential_signal"
+      }
+    },
+    "outcome": "Competence verified; false authority rejected",
+    "mvi": 90,
+    "trust": 1
+  },
+  {
+    "id": "story-aes-03",
+    "context": "Teaching or knowledge transfer is failing to produce understanding",
+    "trigger_pattern": "knowledge not transferring",
+    "action_plan": {
+      "target_actuator": "system_api",
+      "command_payload": {
+        "pedagogy": "examples_before_theory_scaffolding_error_based_feedback_loops"
+      }
+    },
+    "outcome": "Understanding achieved; knowledge applies in new contexts",
+    "mvi": 85,
+    "trust": 1
+  }
+]

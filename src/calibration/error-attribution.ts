@@ -1,2 +1,2 @@
 /** Stub: error-attribution */
-export const error-attribution = {}; // TODO: implement
+export const errorAttribution = {}; // TODO: implement

@@ -1,2 +1,2 @@
 /** Stub: threshold-adjustment */
-export const threshold-adjustment = {}; // TODO: implement
+export const thresholdAdjustment = {}; // TODO: implement
