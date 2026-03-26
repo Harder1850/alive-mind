@@ -19,10 +19,11 @@
  */
 
 import type { Signal } from '../../../alive-constitution/contracts/signal';
-import type { Action } from '../../../alive-constitution/contracts/action';
+import type { Action, DisplayTextAction } from '../../../alive-constitution/contracts/action';
 import type { ASMState } from '../spine/state-model';
 import { findMatchingStory, findStrongLocalMatch } from '../memory/derived-memory';
 import { askTeacher } from './llm-teacher';
+import { stm } from '../memory/stm/short-term-memory';
 
 // ---------------------------------------------------------------------------
 // Sensor schema shape (mirrors alive-body/src/sensors/sensor-registry.ts)
@@ -85,7 +86,7 @@ const UNIT_DOMAIN_MAP: Record<string, { domain: string; utility: string; threat_
   percent:     { domain: 'Science & Tech', utility: 'Proportional measurement; monitor for threshold crossings', threat_threshold: 'near 0% or 100% depending on context' },
 };
 
-function deduceSensorUtility(schema: SensorSchema): Action {
+function deduceSensorUtility(schema: SensorSchema): DisplayTextAction {
   const unitKey = schema.unit.toLowerCase().replace(/[^a-z_]/g, '_');
   const known = UNIT_DOMAIN_MAP[unitKey];
 
@@ -156,7 +157,7 @@ function crossDomainSearch(abstractedContent: string): string {
  * Step 3 — Generate a low-risk reversible probe action.
  * Instead of trying to fully understand the input, probe it to learn by doing.
  */
-function universalProbe(description: string, tag: string): Action {
+function universalProbe(description: string, tag: string): DisplayTextAction {
   const abstracted = abstractToStructural(description);
   const crossDomainInsight = crossDomainSearch(abstracted);
 
@@ -185,6 +186,7 @@ function universalProbe(description: string, tag: string): Action {
  *   4) LLM Teacher (last resort)
  */
 export async function evaluateNovelSignal(signal: Signal, state: ASMState): Promise<Action> {
+  stm.push(signal);
 
   // Tier 1 — Sensor registration fast-path
   if (isNewSensorSignal(signal.raw_content)) {

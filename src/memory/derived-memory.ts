@@ -91,12 +91,27 @@ function loadStories(): readonly Story[] {
 const STORY_STORE: readonly Story[] = loadStories();
 
 // ---------------------------------------------------------------------------
+// Dedicated no-match fallback — always low trust so reasoning-engine escalates
+// ---------------------------------------------------------------------------
+const NO_MATCH_FALLBACK: Story = {
+  id: 'story-no-match',
+  context: 'No pattern matched — signal is genuinely novel',
+  trigger_pattern: '\x00',
+  action_plan: { target_actuator: 'system_api', command_payload: { action: 'escalate_to_teacher' } },
+  outcome: 'No local match. Escalating to LLM Teacher.',
+  mvi: 0,
+  trust: 0.0,
+};
+
+// ---------------------------------------------------------------------------
 // Retrieval — Story-based interface
 // ---------------------------------------------------------------------------
 
 /**
  * Find the highest-MVI story whose trigger_pattern appears in the signal's
- * raw_content. Returns the lowest-trust seed story as a fallback.
+ * raw_content. Returns a zero-trust fallback when nothing matches, so the
+ * reasoning engine escalates to the LLM Teacher rather than recycling an
+ * unrelated high-trust story (e.g. Sun Tzu seeded at trust 1.0).
  */
 export function findMatchingStory(signal: Signal): Story {
   const content = String(signal.raw_content ?? '').toLowerCase();
@@ -106,8 +121,7 @@ export function findMatchingStory(signal: Signal): Story {
   );
 
   if (matches.length === 0) {
-    // Fallback: lowest-trust story (universal "I don't know" response)
-    return [...STORY_STORE].sort((a, b) => a.trust - b.trust)[0]!;
+    return NO_MATCH_FALLBACK;
   }
 
   // Return highest-MVI match (most mission-critical applicable story)
