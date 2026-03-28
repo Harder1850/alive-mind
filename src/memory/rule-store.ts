@@ -2,14 +2,20 @@
  * Rule Store — alive-mind
  * alive-mind/src/memory/rule-store.ts
  *
- * Cognitive module. Imports from alive-constitution only.
- * Does NOT execute. Does NOT call alive-runtime.
+ * Cognitive module. Imports contracts from alive-constitution only.
+ * Does NOT execute actions. Does NOT define law.
+ *
  * Level 2 in the synthesizer priority stack.
- * First match wins — rules evaluated in priority order.
+ * First match wins — evaluated in priority order (lower = higher priority).
+ *
+ * Slice 1 seeded rules (v16 §31.7):
+ *   rule_cpu_high    — condition: cpu_utilization AND urgency > 0.7
+ *   rule_disk_low    — condition: disk_available AND urgency > 0.6
+ *   rule_file_change — condition: file_change_event (always)
  */
 
-import type { Signal } from '../../../alive-constitution/contracts/signal';
-import type { Action } from '../../../alive-constitution/contracts/action';
+import type { Signal } from '../../../../alive-constitution/contracts/signal';
+import type { Action } from '../../../../alive-constitution/contracts/action';
 
 export interface Rule {
   id:          string;
@@ -38,12 +44,9 @@ const SEEDED_RULES: Rule[] = [
       const usagePct = signal.payload?.usage_percent as number ?? 0;
       const level    = cpuRisk >= 0.90 ? 'CRITICAL' : cpuRisk >= 0.80 ? 'HIGH' : 'ELEVATED';
       return {
-        type:     'write_file',
-        filename: 'cpu-alert.log',
-        content:
-          `[${new Date().toISOString()}] CPU ALERT — Level: ${level}\n` +
-          `  usage: ${usagePct.toFixed(2)}%  cpu_risk: ${cpuRisk.toFixed(4)}\n` +
-          `  signal_id: ${signal.id}\n`,
+        type:          'write_file',
+        filename:      'cpu-alert.log',
+        content:       `[${new Date().toISOString()}] CPU ALERT — Level: ${level}\n  usage: ${usagePct.toFixed(2)}%  cpu_risk: ${cpuRisk.toFixed(4)}\n  signal_id: ${signal.id}\n`,
         is_reversible: true,
       };
     },
@@ -59,11 +62,9 @@ const SEEDED_RULES: Rule[] = [
       const bytes = signal.payload?.bytes_available as number ?? 0;
       const gb    = (bytes / 1e9).toFixed(2);
       return {
-        type:     'write_file',
-        filename: 'disk-alert.log',
-        content:
-          `[${new Date().toISOString()}] DISK ALERT — ${gb} GB available\n` +
-          `  signal_id: ${signal.id}\n`,
+        type:          'write_file',
+        filename:      'disk-alert.log',
+        content:       `[${new Date().toISOString()}] DISK ALERT — ${gb} GB available\n  signal_id: ${signal.id}\n`,
         is_reversible: true,
       };
     },
@@ -79,11 +80,9 @@ const SEEDED_RULES: Rule[] = [
       const filePath  = signal.payload?.file_path  as string ?? 'unknown';
       const eventType = signal.payload?.event_type as string ?? 'change';
       return {
-        type:     'write_file',
-        filename: 'file-changes.log',
-        content:
-          `[${new Date().toISOString()}] FILE ${eventType.toUpperCase()} — ${filePath}\n` +
-          `  signal_id: ${signal.id}\n`,
+        type:          'write_file',
+        filename:      'file-changes.log',
+        content:       `[${new Date().toISOString()}] FILE ${eventType.toUpperCase()} — ${filePath}\n  signal_id: ${signal.id}\n`,
         is_reversible: true,
       };
     },
@@ -100,10 +99,12 @@ export interface RuleMatch {
 export function matchRule(signal: Signal): RuleMatch | null {
   const sorted = [...SEEDED_RULES].sort((a, b) => a.priority - b.priority);
   for (const rule of sorted) {
-    let matched = false;
-    try { matched = rule.condition(signal); } catch { continue; }
-    if (matched) {
-      return { rule, action: rule.produce(signal), confidence: rule.confidence, risk: rule.risk };
+    try {
+      if (rule.condition(signal)) {
+        return { rule, action: rule.produce(signal), confidence: rule.confidence, risk: rule.risk };
+      }
+    } catch {
+      continue;
     }
   }
   return null;

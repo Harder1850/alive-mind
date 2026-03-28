@@ -12,7 +12,7 @@ export class MindLoop {
 export function think(signal: Signal): Decision {
   const { candidate } = synthesize(signal);
 
-  const base = {
+  const partial = {
     id:                  crypto.randomUUID(),
     selected_action:     candidate.action,
     confidence:          candidate.confidence,
@@ -20,7 +20,7 @@ export function think(signal: Signal): Decision {
     reason:              candidate.reason,
   };
 
-  const integrity_hash = computeDecisionIntegrityHash(base);
+  const integrity_hash = computeDecisionIntegrityHash(partial);
 
-  return { ...base, integrity_hash };
+  return { ...partial, integrity_hash };
 }
