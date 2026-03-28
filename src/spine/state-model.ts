@@ -10,6 +10,12 @@ export interface ASMState {
   current_environment: string;
   active_goals: string[];
   battery_status: number; // 0.0–1.0
+  /**
+   * v16 §31.6 — CPU risk index (0.0–1.0).
+   * 0.0 = no load risk; 1.0 = critically overloaded.
+   * Updated by the autonomic resource monitor each cycle.
+   */
+  cpu_risk: number;
   mode: 'idle' | 'active' | 'alert' | 'emergency';
   cycleCount: number;
   lastUpdated: number;
@@ -25,6 +31,7 @@ export class StateModel {
     current_environment: 'unknown',
     active_goals: [],
     battery_status: 1.0,
+    cpu_risk: 0.0,
     mode: 'idle',
     cycleCount: 0,
     lastUpdated: Date.now(),

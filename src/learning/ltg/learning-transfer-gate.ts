@@ -1,20 +1,25 @@
+/**
+ * Learning Transfer Gate (LTG) — alive-mind.
+ *
+ * Decides whether a Story from short-term working memory should be
+ * promoted to long-term memory (stories.json).
+ *
+ * Return type:
+ *   'PROMOTE' — story meets criteria for LTM transfer
+ *   'DEFER'   — story does not yet qualify; retain in STM
+ *
+ * Slice 1 stub: always returns DEFER.
+ * Full implementation (trust + MVI thresholds) is gated on Slice 2 LTM work.
+ */
+
 import type { Story } from '../../memory/derived-memory';
 
-const TRUST_THRESHOLD = 0.85;
-const MVI_THRESHOLD = 0.7;
+export type LtgDecision = 'PROMOTE' | 'DEFER';
 
-/**
- * Learning Transfer Gate.
- * Decides whether a Story from short-term working memory is ready
- * to be promoted to long-term memory (stories.json).
- *
- * Transfer criteria:
- *   - trust >= TRUST_THRESHOLD (high confidence from reinforcement)
- *   - mvi   >= MVI_THRESHOLD   (mission-value index shows importance)
- */
 export class LearningTransferGate {
-  shouldTransfer(entry: Story): boolean {
-    return entry.trust >= TRUST_THRESHOLD && entry.mvi >= MVI_THRESHOLD;
+  /** Slice 1 stub — returns DEFER unconditionally. */
+  evaluate(_entry: Story): LtgDecision {
+    return 'DEFER';
   }
 }
 
