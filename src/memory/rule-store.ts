@@ -14,8 +14,8 @@
  *   rule_file_change — condition: file_change_event (always)
  */
 
-import type { Signal } from '../../../../alive-constitution/contracts/signal';
-import type { Action } from '../../../../alive-constitution/contracts/action';
+import type { Signal } from '../../../alive-constitution/contracts/signal';
+import type { Action } from '../../../alive-constitution/contracts/action';
 
 export interface Rule {
   id:          string;

@@ -19,6 +19,7 @@
  */
 
 import type { Signal } from '../../../alive-constitution/contracts/signal';
+import { makeSignal } from '../../../alive-constitution/contracts/signal';
 import type { Action, DisplayTextAction } from '../../../alive-constitution/contracts/action';
 import type { ASMState } from '../spine/state-model';
 import { findMatchingStory, findStrongLocalMatch } from '../memory/derived-memory';
@@ -141,14 +142,18 @@ function abstractToStructural(content: string): string {
  * Sun Tzu → supply lines, Survival → orientation).
  */
 function crossDomainSearch(abstractedContent: string): string {
-  const signal: Signal = {
+  const signal: Signal = makeSignal({
     id: 'ulp-abstract',
     source: 'system_api',
+    kind: 'user_input',
     raw_content: abstractedContent,
     timestamp: Date.now(),
+    urgency: 0.2,
+    confidence: 0.9,
+    quality_score: 0.9,
     threat_flag: false,
     firewall_status: 'cleared',
-  };
+  });
   const story = findMatchingStory(signal);
   return `[${story.id} / ${story.context}] → "${story.outcome}"`;
 }

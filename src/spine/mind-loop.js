@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MindLoop = void 0;
 exports.think = think;
 const decision_1 = require("../../../alive-constitution/contracts/decision");
+const synthesize_1 = require("../decisions/synthesize");
 class MindLoop {
     think(signal) {
         return think(signal);
@@ -10,37 +11,14 @@ class MindLoop {
 }
 exports.MindLoop = MindLoop;
 function think(signal) {
-    const text = signal.raw_content.toLowerCase().trim();
-    let decision;
-    if (text.includes('hello')) {
-        decision = {
-            id: crypto.randomUUID(),
-            selected_action: {
-                type: 'display_text',
-                payload: 'Hello from ALIVE.',
-            },
-            confidence: 0.9,
-            admissibility_status: 'pending',
-            reason: 'Matched greeting pattern.',
-        };
-    }
-    else {
-        decision = {
-            id: crypto.randomUUID(),
-            selected_action: {
-                type: 'display_text',
-                payload: `Received: ${signal.raw_content}`,
-            },
-            confidence: 0.6,
-            admissibility_status: 'pending',
-            reason: 'Default echo response for initial vertical slice.',
-        };
-    }
-    // PATCH 2: Compute integrity hash immediately after decision creation
-    const integrity_hash = (0, decision_1.computeDecisionIntegrityHash)(decision);
-    return {
-        ...decision,
-        integrity_hash,
+    const { candidate } = (0, synthesize_1.synthesize)(signal);
+    const partial = {
+        id: crypto.randomUUID(),
+        selected_action: candidate.action,
+        confidence: candidate.confidence,
+        admissibility_status: 'pending',
+        reason: candidate.reason,
     };
+    const integrity_hash = (0, decision_1.computeDecisionIntegrityHash)(partial);
+    return { ...partial, integrity_hash };
 }
-//# sourceMappingURL=mind-loop.js.map

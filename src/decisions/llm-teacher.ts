@@ -1,5 +1,7 @@
 /**
  * LLM Teacher — Last-resort cognitive fallback for alive-mind.
+ * Slice 5 target: canonical Level 5 implementation behind synthesize.ts.
+ * Keep standalone during cleanup; do not wire directly from runtime here.
  *
  * Called only when local derived memory and the Universal Learning Protocol
  * both fail to produce a confident action. Uses the Anthropic API with

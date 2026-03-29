@@ -21,6 +21,7 @@
 import { episodeStore }  from './episode-store';
 import { semanticGraph } from './semantic-graph';
 import { ltg }           from '../learning/ltg/learning-transfer-gate';
+import { decayAll as decayContradictions } from './contradiction-store';
 
 // ─── Consolidator ─────────────────────────────────────────────────────────────
 
@@ -43,6 +44,7 @@ export class Consolidator {
 
     // ── Step 1: Decay ────────────────────────────────────────────────────────
     episodeStore.decay(elapsed);
+    decayContradictions();
 
     // ── Step 2: Promote eligible episodes via LTG ────────────────────────────
     const candidates = episodeStore.getEligible();
