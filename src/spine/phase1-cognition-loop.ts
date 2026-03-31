@@ -6,10 +6,64 @@ import { Phase1Memory } from "../memory/phase1-memory";
 import type { RecallCandidate } from "../memory/memory-types";
 import type { OutcomeRecord } from "../memory/types";
 
+// ── ActionCandidate ────────────────────────────────────────────────────────────
+// The mind's richer intermediate output — wraps the constitution Action with
+// scoring and rationale metadata.  Lives here (mind layer) because it is a
+// cognitive reasoning artifact.  Runtime translates it into whitelist decisions
+// and body execution calls.
+
+export type ActionCandidateType =
+  | 'ignore'
+  | 'monitor'
+  | 'notify'
+  | 'recommend'
+  | 'safe_file_edit'
+  | 'safe_command_run'
+  | 'cleanup_temp'
+  | 'git_status_check';
+
+export interface ActionCandidate {
+  candidate_id: string;
+  action_type: ActionCandidateType;
+  rationale: string;
+  confidence_score: number;       // 0.0–1.0
+  risk_score: number;             // 0.0–1.0 (lower = safer)
+  reversibility_score: number;    // 0.0–1.0 (higher = more reversible)
+  requires_human_approval: boolean;
+  support_refs: string[];         // signal IDs, memory refs, rule IDs
+}
+
+// ── Risk/reversibility tables (authoritative in mind layer) ───────────────────
+
+const ACTION_RISK: Record<ActionCandidateType, number> = {
+  ignore:           0.00,
+  monitor:          0.02,
+  notify:           0.05,
+  git_status_check: 0.05,
+  recommend:        0.10,
+  cleanup_temp:     0.20,
+  safe_file_edit:   0.25,
+  safe_command_run: 0.35,
+};
+
+const ACTION_REVERSIBILITY: Record<ActionCandidateType, number> = {
+  ignore:           1.00,
+  monitor:          1.00,
+  notify:           1.00,
+  git_status_check: 1.00,
+  recommend:        1.00,
+  safe_file_edit:   0.80,
+  cleanup_temp:     0.40,
+  safe_command_run: 0.50,
+};
+
+// ── Phase1CognitionOutput ──────────────────────────────────────────────────────
+
 export interface Phase1CognitionOutput {
   interpretedSummary: string;
   recalledItems: RecallCandidate[];
-  candidateAction: Action;
+  candidateAction: Action;            // constitution Action (backward compat)
+  actionCandidate: ActionCandidate;   // richer proving-scenario candidate
   confidence: number;
   reasoningSummary: string;
   deepCognitionOpened: boolean;
@@ -45,21 +99,125 @@ const orchestrator = new MemoryOrchestrator(phase1Memory.working);
 let lastSummary = "";
 let lastActionType = "display_text";
 
-function makeCandidateAction(signal: Signal, recalledCount: number): Action {
-  const text = String(signal.raw_content ?? "");
-  if (signal.kind === "file_change_event") {
+// ── Action type selection ─────────────────────────────────────────────────────
+
+/**
+ * Choose an ActionCandidateType from the signal kind and cognition depth.
+ * Logic is deterministic and grounded in what we actually know about the signal.
+ */
+function chooseActionType(signal: Signal, deepCognitionOpened: boolean, recalledCount: number): ActionCandidateType {
+  const raw = String(signal.raw_content ?? "").toLowerCase();
+
+  // Explicit error/failure content → notify
+  if (raw.includes("error") || raw.includes("fail") || raw.includes("crash")) {
+    return "notify";
+  }
+
+  switch (signal.kind) {
+    case "file_change_event":
+      // Deep cognition or prior memory context → inspect git to understand what changed
+      return deepCognitionOpened || recalledCount > 0 ? "git_status_check" : "monitor";
+
+    case "repo_commit":
+    case "repo_pr":
+      return "git_status_check";
+
+    case "user_input":
+      // Respond to explicit user requests with a recommendation
+      return "recommend";
+
+    case "process_error":
+      return "notify";
+
+    case "process_health":
+      // Low battery / degraded health → notify; otherwise monitor
+      if (signal.urgency > 0.6 || signal.threat_flag) return "notify";
+      return "monitor";
+
+    case "cpu_utilization":
+    case "disk_available":
+    case "system_startup":
+      return "monitor";
+
+    default:
+      return deepCognitionOpened ? "recommend" : "monitor";
+  }
+}
+
+// ── Candidate builder ─────────────────────────────────────────────────────────
+
+function buildActionCandidate(
+  signal: Signal,
+  actionType: ActionCandidateType,
+  confidence: number,
+  recalledItems: RecallCandidate[],
+  deepCognitionOpened: boolean,
+): ActionCandidate {
+  const risk = ACTION_RISK[actionType];
+  const rev  = ACTION_REVERSIBILITY[actionType];
+
+  const rationale = buildRationale(signal, actionType, recalledItems, deepCognitionOpened);
+
+  return {
+    candidate_id:           `cand-${signal.id}`,
+    action_type:            actionType,
+    rationale,
+    confidence_score:       Math.round(confidence * 1000) / 1000,
+    risk_score:             risk,
+    reversibility_score:    rev,
+    requires_human_approval: risk > 0.2,
+    support_refs:           [signal.id, ...recalledItems.slice(0, 3).map((r) => r.id)],
+  };
+}
+
+function buildRationale(
+  signal: Signal,
+  actionType: ActionCandidateType,
+  recalled: RecallCandidate[],
+  deep: boolean,
+): string {
+  const src = `${signal.source}/${signal.kind}`;
+  const mem = recalled.length > 0 ? ` (${recalled.length} memory items recalled)` : "";
+  const depth = deep ? " [deep cognition]" : " [baseline]";
+
+  switch (actionType) {
+    case "git_status_check":
+      return `File-change detected from ${src}${mem}${depth} — inspecting repository state to understand scope of change`;
+    case "notify":
+      return `Signal from ${src} indicates degraded state or error condition${mem}${depth} — surfacing for human awareness`;
+    case "monitor":
+      return `Signal from ${src} is within normal parameters${mem}${depth} — continuing passive observation`;
+    case "recommend":
+      return `Explicit input from ${src}${mem}${depth} — generating advisory response without autonomous action`;
+    case "safe_file_edit":
+      return `Signal from ${src}${mem}${depth} — proposing targeted file edit in sandbox path`;
+    case "cleanup_temp":
+      return `Signal from ${src}${mem}${depth} — temporary files detected, proposing scoped cleanup`;
+    case "safe_command_run":
+      return `Signal from ${src}${mem}${depth} — proposing a safe read-only command`;
+    case "ignore":
+      return `Signal from ${src} is below salience threshold${depth} — no action warranted`;
+  }
+}
+
+// ── Constitution Action builder (backward compat) ────────────────────────────
+
+function makeCandidateAction(signal: Signal, actionCandidate: ActionCandidate): Action {
+  if (signal.kind === "file_change_event" || actionCandidate.action_type === "git_status_check") {
     return {
       type: "display_text",
-      payload: `Observed file-change event. ${recalledCount > 0 ? `Recalled ${recalledCount} related items.` : "No strong prior links."}`,
+      payload: actionCandidate.rationale,
       is_reversible: true,
     };
   }
   return {
     type: "display_text",
-    payload: `Signal ${signal.kind}: ${text.slice(0, 120)}`,
+    payload: `[${actionCandidate.action_type.toUpperCase()}] ${actionCandidate.rationale}`,
     is_reversible: true,
   };
 }
+
+// ── Main cognition loop ───────────────────────────────────────────────────────
 
 export function runPhase1CognitionLoop(input: {
   signal: Signal;
@@ -72,7 +230,6 @@ export function runPhase1CognitionLoop(input: {
   const salience = deepCognitionOpened ? 0.8 : 0.45;
 
   // Phase1Memory: encode for multi-store recall (working, episodic, structural, reference, associative).
-  // Working-store writes land in the shared phase1Memory.working instance.
   phase1Memory.encode({
     id: signal.id,
     cue: normalizedCue,
@@ -94,8 +251,7 @@ export function runPhase1CognitionLoop(input: {
     ],
   });
 
-  // MemoryOrchestrator: encode for reference/thread/episode routing with salience scoring.
-  // If this routes to "working", it writes into the shared phase1Memory.working instance.
+  // MemoryOrchestrator: encode for reference/thread/episode routing.
   orchestrator.encode({
     id: signal.id,
     text: normalizedCue,
@@ -118,12 +274,16 @@ export function runPhase1CognitionLoop(input: {
     precisionNeed: deepCognitionOpened ? "high" : "medium",
   });
 
-  const candidateAction = makeCandidateAction(signal, recalledItems.length);
   const confidence = Math.max(0.35, Math.min(0.95, signal.confidence * 0.6 + recalledItems.length * 0.03));
+  const actionType = chooseActionType(signal, deepCognitionOpened, recalledItems.length);
+
+  const actionCandidate = buildActionCandidate(signal, actionType, confidence, recalledItems, deepCognitionOpened);
+  const candidateAction = makeCandidateAction(signal, actionCandidate);
+
   const interpretedSummary = `Signal from ${signal.source}/${signal.kind}: ${normalizedCue.slice(0, 160)}`;
   const reasoningSummary = deepCognitionOpened
-    ? `Deep cognition opened. Recalled ${recalledItems.length} items before generating candidate action.`
-    : `Baseline interpretation only. Recalled ${recalledItems.length} lightweight items.`;
+    ? `Deep cognition opened. Recalled ${recalledItems.length} items. Selected action: ${actionType}.`
+    : `Baseline interpretation. Recalled ${recalledItems.length} items. Selected action: ${actionType}.`;
 
   lastSummary = interpretedSummary;
   lastActionType = candidateAction.type;
@@ -132,6 +292,7 @@ export function runPhase1CognitionLoop(input: {
     interpretedSummary,
     recalledItems,
     candidateAction,
+    actionCandidate,
     confidence,
     reasoningSummary,
     deepCognitionOpened,
@@ -140,7 +301,6 @@ export function runPhase1CognitionLoop(input: {
 
 export function pushPhase1Outcome(feedback: Phase1OutcomeFeedback): void {
   // Phase1Memory: encode outcome into working store for immediate recall.
-  // Writes to the shared phase1Memory.working instance.
   phase1Memory.encodeOutcome(
     feedback.signalId,
     `${feedback.success ? "success" : "failure"}: ${feedback.note}`,
