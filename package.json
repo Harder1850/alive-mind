@@ -4,7 +4,8 @@
   "description": "Cognitive layer of ALIVE. Handles unconscious processing, STM, LTM, reasoning, memory, simulation, and decision formation.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "node --test --require tsx/cjs tests/*.test.ts"
   },
   "license": "Apache-2.0",
   "devDependencies": {
