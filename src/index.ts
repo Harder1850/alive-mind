@@ -1,6 +1,6 @@
 /**
  * ALIVE Mind — Entry Point
- * Exports the cognitive interface and core ASM components.
+ * Preserves legacy exports and adds stable public surfaces.
  */
 export { think } from './spine/mind-loop';
 export { StateModel } from './spine/state-model';
@@ -16,3 +16,5 @@ export {
   getPhase1LoopSummary,
   getPhase1Orchestrator,
 } from './spine/phase1-cognition-loop';
+
+export * from './public';
