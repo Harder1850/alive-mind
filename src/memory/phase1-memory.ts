@@ -7,6 +7,7 @@ import { ReferenceAdapter } from "./reference-adapter";
 import { ReferenceStore } from "./reference-store";
 import { StructuralMemory } from "./structural-memory";
 import { WorkingMemory } from "./working-memory";
+import { guardMemoryWrite } from "../lockdown/memory-write-guard";
 
 export class Phase1Memory {
   readonly working = new WorkingMemory(80);
@@ -35,10 +36,12 @@ export class Phase1Memory {
   });
 
   encode(event: MemoryEvent): void {
+    if (!guardMemoryWrite('Phase1Memory.encode')) return;
     this.encoder.encode(event);
   }
 
   encodeOutcome(eventId: string, outcome: string, confidence?: number): void {
+    if (!guardMemoryWrite('Phase1Memory.encodeOutcome')) return;
     this.encoder.encodeOutcome(eventId, outcome, confidence);
   }
 

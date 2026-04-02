@@ -12,6 +12,7 @@ import type {
   ProcedureRecord,
   SemanticRecord,
 } from "./types";
+import { guardMemoryWrite } from "../lockdown/memory-write-guard";
 
 export class MemoryOrchestrator {
   readonly references: ReferenceStore;
@@ -36,31 +37,37 @@ export class MemoryOrchestrator {
   encode(observation: IncomingObservation): ReturnType<typeof chooseEncodingTarget> {
     const decision = chooseEncodingTarget(observation);
 
-    if (decision.target === "reference") {
-      this.references.upsert(decision.record);
-    } else if (decision.target === "thread") {
-      this.threads.upsert(decision.record);
-    } else if (decision.target === "working") {
-      this.working.push({
-        id: decision.record.id,
-        kind: "working_record",
-        value: observation.text,
-        priority: Math.max(0.1, Math.min(1, decision.record.confidence)),
-        expiresAt: observation.timestamp + 5 * 60_000,
-      });
-    } else if (decision.target === "episode") {
-      this.episodes.unshift(decision.record);
-      this.episodes.splice(256);
+    // Passive mode guard — analysis (chooseEncodingTarget) is always allowed;
+    // only the actual memory mutations are suppressed.
+    if (guardMemoryWrite('MemoryOrchestrator.encode')) {
+      if (decision.target === "reference") {
+        this.references.upsert(decision.record);
+      } else if (decision.target === "thread") {
+        this.threads.upsert(decision.record);
+      } else if (decision.target === "working") {
+        this.working.push({
+          id: decision.record.id,
+          kind: "working_record",
+          value: observation.text,
+          priority: Math.max(0.1, Math.min(1, decision.record.confidence)),
+          expiresAt: observation.timestamp + 5 * 60_000,
+        });
+      } else if (decision.target === "episode") {
+        this.episodes.unshift(decision.record);
+        this.episodes.splice(256);
+      }
     }
 
     return decision;
   }
 
   appendOutcome(record: OutcomeRecord): void {
+    if (!guardMemoryWrite('MemoryOrchestrator.appendOutcome')) return;
     this.outcomes.append(record);
   }
 
   writeWorking(item: WorkingItem): void {
+    if (!guardMemoryWrite('MemoryOrchestrator.writeWorking')) return;
     this.working.push(item);
   }
 
@@ -73,6 +80,7 @@ export class MemoryOrchestrator {
   }
 
   upsertProcedure(record: ProcedureRecord): void {
+    if (!guardMemoryWrite('MemoryOrchestrator.upsertProcedure')) return;
     const idx = this.procedures.findIndex((p) => p.id === record.id);
     if (idx >= 0) {
       this.procedures[idx] = { ...record, updatedAt: Date.now() };
@@ -83,6 +91,7 @@ export class MemoryOrchestrator {
   }
 
   upsertSemantic(record: SemanticRecord): void {
+    if (!guardMemoryWrite('MemoryOrchestrator.upsertSemantic')) return;
     const idx = this.semantics.findIndex((s) => s.id === record.id);
     if (idx >= 0) {
       this.semantics[idx] = { ...record, updatedAt: Date.now() };
@@ -93,6 +102,7 @@ export class MemoryOrchestrator {
   }
 
   upsertContradiction(record: ContradictionRecord): void {
+    if (!guardMemoryWrite('MemoryOrchestrator.upsertContradiction')) return;
     const idx = this.contradictions.findIndex((c) => c.id === record.id);
     if (idx >= 0) {
       this.contradictions[idx] = { ...record, updatedAt: Date.now() };
@@ -104,12 +114,12 @@ export class MemoryOrchestrator {
 
   recall(ctx: RecallContext): RecallResult {
     return recallTop(ctx, {
-      working: this.working.list(),
-      references: this.references.list(),
-      procedures: this.procedures,
-      episodes: this.episodes,
-      semantics: this.semantics,
-      threads: this.threads.list(),
+      working:        this.working.list(),
+      references:     this.references.list(),
+      procedures:     this.procedures,
+      episodes:       this.episodes,
+      semantics:      this.semantics,
+      threads:        this.threads.list(),
       contradictions: this.contradictions,
     });
   }
