@@ -59,3 +59,9 @@ Must comply with: Constitution → Runtime governance → Memory contracts
 
 ## Drift Warning
 ⚠️ If this layer executes actions, architecture integrity is broken.
+
+## Documentation Standard
+
+This repository follows the ALIVE documentation templates defined in:
+
+alive-constitution/docs/standards/TEMPLATES.md
