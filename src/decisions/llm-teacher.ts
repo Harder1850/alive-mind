@@ -16,7 +16,7 @@ import { join } from 'path';
 config({ path: join(__dirname, '../../.env') });
 import Anthropic from '@anthropic-ai/sdk';
 
-import type { Signal } from '../../../alive-constitution/contracts/signal';
+import type { Signal } from '../../../alive-constitution/contracts';
 import type { Action } from '../../../alive-constitution/contracts/action';
 import type { ASMState } from '../spine/state-model';
 

@@ -13,7 +13,7 @@
  * This is a minimal passive mode hook - no architecture changes needed.
  */
 
-import type { Signal } from '../../../alive-constitution/contracts/signal';
+import type { Signal } from '../../../alive-constitution/contracts';
 import type { Decision } from '../../../alive-constitution/contracts/decision';
 import { computeDecisionIntegrityHash } from '../../../alive-constitution/contracts/decision';
 

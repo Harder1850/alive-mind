@@ -22,7 +22,7 @@
  * Those are Slice 4+ concerns.
  */
 
-import type { Episode, MemoryKey } from '../../../alive-constitution/contracts/memory';
+import type { Episode, MemoryKey } from '../../../alive-constitution/contracts';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 

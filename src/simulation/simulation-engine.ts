@@ -29,7 +29,7 @@
  *   - Returns structured placeholder outputs when projection is not yet implemented.
  */
 
-import type { Signal }          from '../../../../alive-constitution/contracts/signal';
+import type { Signal }          from '../../../../alive-constitution/contracts';
 import type { ActionCandidate } from '../decisions/synthesize';
 
 // ── Simulation depth ───────────────────────────────────────────────────────────

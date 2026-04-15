@@ -31,7 +31,7 @@
  *   LTG continues to work unchanged — this layer adds the richer interface.
  */
 
-import type { Episode } from '../../../../alive-constitution/contracts/memory';
+import type { Episode } from '../../../../alive-constitution/contracts';
 import { LearningTransferGate, type LtgDecision } from '../learning/ltg/learning-transfer-gate';
 import type { Contradiction } from '../memory/contradiction-store';
 

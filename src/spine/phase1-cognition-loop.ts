@@ -1,5 +1,5 @@
 import type { Action } from "../../../alive-constitution/contracts/action";
-import type { Signal } from "../../../alive-constitution/contracts/signal";
+import type { Signal } from "../../../alive-constitution/contracts";
 
 import { MemoryOrchestrator } from "../memory/memory-orchestrator";
 import { Phase1Memory } from "../memory/phase1-memory";

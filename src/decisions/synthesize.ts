@@ -12,7 +12,7 @@
  * Fail closed: unimplemented levels return null — never throw, never simulate.
  */
 
-import type { Signal } from '../../../alive-constitution/contracts/signal';
+import type { Signal } from '../../../alive-constitution/contracts';
 import type { Action } from '../../../alive-constitution/contracts/action';
 import { matchRule }   from '../memory/rule-store';
 import { validate,      type SVEResult  } from '../cognition/sve';

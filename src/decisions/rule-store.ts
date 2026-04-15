@@ -17,7 +17,7 @@
  * All contracts import from alive-constitution/contracts/.
  */
 
-import type { Signal } from '../../../alive-constitution/contracts/signal';
+import type { Signal } from '../../../alive-constitution/contracts';
 import type { DisplayTextAction } from '../../../alive-constitution/contracts/action';
 import type { ASMState } from '../spine/state-model';
 

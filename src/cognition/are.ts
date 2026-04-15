@@ -11,7 +11,7 @@
  * Slice 4 implementation.
  */
 
-import type { Signal }          from '../../../alive-constitution/contracts/signal';
+import type { Signal }          from '../../../alive-constitution/contracts';
 import type { ActionCandidate } from '../decisions/synthesize';
 
 export interface AREChallenge {

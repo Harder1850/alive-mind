@@ -31,7 +31,7 @@
  *   this module is the migration target for a unified evaluation path.
  */
 
-import type { Signal }          from '../../../../alive-constitution/contracts/signal';
+import type { Signal }          from '../../../../alive-constitution/contracts';
 import type { ActionCandidate } from '../decisions/synthesize';
 import { validate,              type SVEResult  } from '../cognition/sve';
 import { scoreCandidate,        type CCEResult  } from '../cognition/cce';

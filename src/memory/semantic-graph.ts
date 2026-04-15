@@ -16,7 +16,7 @@
  * deferred to Slice 4+.  Do not add them here.
  */
 
-import type { Episode, MemoryKey } from '../../../alive-constitution/contracts/memory';
+import type { Episode, MemoryKey } from '../../../alive-constitution/contracts';
 
 // ─── SemanticNode ─────────────────────────────────────────────────────────────
 

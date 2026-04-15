@@ -19,9 +19,8 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { makeSignal } from '../../alive-constitution/contracts/signal';
-import type { Signal } from '../../alive-constitution/contracts/signal';
-import type { Episode } from '../../alive-constitution/contracts/memory';
+import { makeSignal } from '../../alive-constitution/contracts';
+import type { Signal, Episode } from '../../alive-constitution/contracts';
 
 import { interpretSignal } from '../src/interpretation/signal-interpreter';
 import { generateCandidates } from '../src/candidates/candidate-generator';

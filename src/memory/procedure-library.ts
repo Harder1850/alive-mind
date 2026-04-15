@@ -17,7 +17,7 @@
  * Those are future-slice concerns.
  */
 
-import type { MemoryKey, Episode } from '../../../alive-constitution/contracts/memory';
+import type { MemoryKey, Episode } from '../../../alive-constitution/contracts';
 import type { Action }             from '../../../alive-constitution/contracts/action';
 import { episodeStore }            from './episode-store';
 

@@ -1,4 +1,4 @@
-import type { Signal } from '../../../../alive-constitution/contracts/signal';
+import type { Signal } from '../../../../alive-constitution/contracts';
 
 const MAX_SIZE = 50;
 

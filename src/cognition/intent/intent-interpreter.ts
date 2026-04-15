@@ -16,7 +16,7 @@
  */
 
 import type { IntentRequest, IntentResult, IntentCategory } from "../../../../alive-constitution/contracts/intent";
-import type { SignalKind } from "../../../../alive-constitution/contracts/signal";
+import type { SignalKind } from "../../../../alive-constitution/contracts";
 
 // ── Pattern types ──────────────────────────────────────────────────────────────
 

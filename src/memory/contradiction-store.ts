@@ -18,7 +18,7 @@
  * Slice 4 implementation.
  */
 
-import type { Signal } from '../../../alive-constitution/contracts/signal';
+import type { Signal } from '../../../alive-constitution/contracts';
 
 export interface Contradiction {
   id:                 string;

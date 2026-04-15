@@ -22,7 +22,7 @@
  *   • Decay of the contradictions set (Slice 4)
  */
 
-import type { Episode } from '../../../../alive-constitution/contracts/memory';
+import type { Episode } from '../../../../alive-constitution/contracts';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

@@ -18,8 +18,8 @@
  * Invariant: MIND_CANNOT_EXECUTE — this module produces Actions only.
  */
 
-import type { Signal } from '../../../alive-constitution/contracts/signal';
-import { makeSignal } from '../../../alive-constitution/contracts/signal';
+import type { Signal } from '../../../alive-constitution/contracts';
+import { makeSignal } from '../../../alive-constitution/contracts';
 import type { Action, DisplayTextAction } from '../../../alive-constitution/contracts/action';
 import type { ASMState } from '../spine/state-model';
 import { findMatchingStory, findStrongLocalMatch } from '../memory/derived-memory';

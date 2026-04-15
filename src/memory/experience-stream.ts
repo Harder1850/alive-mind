@@ -15,7 +15,7 @@
 
 import { appendFileSync, readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
-import type { Signal } from '../../../alive-constitution/contracts/signal';
+import type { Signal } from '../../../alive-constitution/contracts';
 import type { Action } from '../../../alive-constitution/contracts/action';
 
 export interface ExperienceEntry {
