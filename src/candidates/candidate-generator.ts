@@ -34,7 +34,7 @@
  * injectable config — no policy values are hardcoded as final.
  */
 
-import type { Signal } from '../../../../alive-constitution/contracts';
+import type { Signal } from '../../../alive-constitution/contracts';
 import { synthesize } from '../decisions/synthesize';
 import type { ActionCandidate as SynthesisCandidate, SynthesizerLevel } from '../decisions/synthesize';
 import type { RecallResult } from '../memory/recall-engine';

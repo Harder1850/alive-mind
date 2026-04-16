@@ -23,7 +23,7 @@
  *   unchanged — this module provides an explicit surface for the same reasoning.
  */
 
-import type { Signal, SignalKind } from '../../../../alive-constitution/contracts';
+import type { Signal, SignalKind } from '../../../alive-constitution/contracts';
 
 // ── Classification enums ───────────────────────────────────────────────────────
 

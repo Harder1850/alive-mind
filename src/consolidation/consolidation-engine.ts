@@ -25,7 +25,7 @@
  *   - Pruned items are listed in the result, never silently dropped.
  */
 
-import type { Episode } from '../../../../alive-constitution/contracts';
+import type { Episode } from '../../../alive-constitution/contracts';
 import type { WorkingItem } from '../memory/memory-types';
 import { evaluateBatch, type BatchPromotionResult } from '../promotion/promotion-policy';
 import { compress } from '../learning/compression/compression-engine';
